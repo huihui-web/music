@@ -453,7 +453,7 @@
         }
 
         .words-box>p {
-            height: .37rem;
+            height: .4rem;
             line-height: .4rem;
         }
 
@@ -563,10 +563,10 @@
 
         .time-box {
             position: absolute;
-            top: -.19rem;
+            top: -.2rem;
             width: 100%;
             font-size: .14rem;
-
+            
         }
 
         .tl {
@@ -576,11 +576,9 @@
         .tr {
             float: right;
         }
-
-        .t {
+        .t{
             color: #fff6f7;
         }
-
         .word-layer {
             position: absolute;
             top: 0;
@@ -592,44 +590,7 @@
         .active-bg {
             background: rgb(94, 117, 121) !important;
             opacity: 0.8 !important;
-
-        }
-
-        .play-rate {
-            position: absolute;
-            right: .25rem;
-            top: .33rem;
-            /* border: .02rem solid #fff;
-            border-radius: 50%; */
-            width: .25rem;
-            height: .25rem;
-            line-height: .25rem;
-            text-align: center;
-            color: #fff;
-            font-size: .16rem;
-        }
-
-        .play-area {
-            width: 80%;
-            height: 1px;
-            margin: 0% auto;
-            /* background-color: #fff; */
-            position: relative;
-            top: 2.15rem;
-            opacity: .5;
-            border-top: .02rem dotted #fff;
-        }
-
-        .play-area::after {
-            content: '';
-            display: block;
-            width: .25rem;
-            height: .25rem;
-            background: url('./play(1).png');
-            background-size: cover;
-            position: relative;
-            left: 100%;
-            top: -.1225rem;
+            
         }
     </style>
 </head>
@@ -736,7 +697,6 @@
                 <img src="./play(2).png" class="auto-img" data-index="0" alt="">
                 <img src="./next.png" class="auto-img1" alt="">
                 <img src="./loop-once.png" class="auto-img3" data-mode="0" alt="">
-                <div class="play-rate">1x</div>
             </div>
             <!-- <div class="singer-name">
                 <div>歌名: <span>1</span></div>
@@ -750,10 +710,7 @@
             <div class="words">
                 <div class="words-box">
                 </div>
-                <!-- 视图层 -->
-                <div class="word-layer">
-                    <div class="play-areas"></div>
-                </div>
+                <div class="word-layer"></div>
             </div>
 
             <!-- 关闭 -->
@@ -771,7 +728,6 @@
     <script>
         $(function () {
             var $mask = $('.mask');
-            
             var maskWidth = $mask.width();
             var url = 'https://music.163.com/song/media/outer/url?id=';
             //获取未激活进度条宽度
@@ -925,7 +881,7 @@
                 var id = $liActive.data('id');
                 $.ajax({
                     type: 'GET',
-                    url: 'https://www.arthurdon.top:10099/lyric?id=' + id,
+                    url: 'https://www.arthurdon.top:10099/lyric?id=' + id,//修改
                     success: function (data) {
 
                         //移出其他歌词
@@ -952,10 +908,10 @@
 
                                 $('.words-box').append($p);
                             }
-                            
+
+
                         }
-                        
-                     
+
                         self.play();
                         var $animate = $liActive.find('.animate');
                         $animate.find('.line').css({
@@ -992,9 +948,8 @@
             //时间
             //监听音频实时变化
             audio.ontimeupdate = function () {
-               p= $('.words-box>p');
                 var $ps = $('.words-box>p');
-               pTop= $('.words-box>p').height();
+
                 tl.text(dealSongTime(this.currentTime * 1000));
                 var height = $ps.height();
                 // console.log('height ==> ', height);
@@ -1030,7 +985,7 @@
                         if (playTarget) {
 
                             $('.words-box').animate({
-                                top: wordsBoxTop - height * i  + 'px'
+                                top: wordsBoxTop - height * i - 8 + 'px'
                             }, 200)
                         }
 
@@ -1046,23 +1001,6 @@
                         break;
                     }
 
-                }
-                if (playRate.data('rate') == 0.5) {
-                    audio.playbackRate = 0.5;
-                    // playRate.text('1x');
-                    // playRate.data('rate',1);
-                } else if (playRate.data('rate') == 1) {
-                    audio.playbackRate = 1;
-                    // playRate.text('1.5x');
-                    // playRate.data('rate',1.5);
-                } else if (playRate.data('rate') == 1.5) {
-                    audio.playbackRate = 1.5;
-                    // playRate.text('2x');
-                    // playRate.data('rate',2);
-                } else if (playRate.data('rate') == 2) {
-                    audio.playbackRate = 2;
-                    // playRate.text('0.5x');
-                    // playRate.data('rate',0.5);
                 }
             }
             // var avaterBtn=$('.auto-img');
@@ -1127,7 +1065,7 @@
                 //获取歌单
                 $.ajax({
                     type: 'GET',
-                    url: 'https://www.arthurdon.top:10099/top/list?idx=1',
+                    url: 'https://www.arthurdon.top:10099/top/list?idx=1',//修改
                     success: function (data) {
                         console.log('data ==> ', data);
 
@@ -1306,8 +1244,6 @@
             $avater.on('click', function () {
                 readList.hide();
                 songWord.show();
-                 stratTop = $('.words-box').position().top;
-                    
                 $('.nav').addClass('active-bg');
                 $('.words').addClass('active-bg');
                 $('.tl,.tr').addClass('t');
@@ -1401,14 +1337,6 @@
             let wordLayer = $('.word-layer');
             let wordsBox = $('.words-box');
             var timer = null;
-            // var timer1 = null;
-            let playArea = $('.play-areas');
-            //获取歌词版初始高度
-            
-            var stratTop = 0;
-            var pTop = 0;
-            var p = null;
-            var TOP = null;
             wordLayer.on('touchstart', (e) => {
                 clearTimeout(timer);
                 var startY = e.targetTouches[0].pageY;
@@ -1418,60 +1346,21 @@
                     var moveY = e.targetTouches[0].pageY;
                     var y = startY - moveY;
 
-                    TOP = -y + a;
+                    var TOP = -y + a;
 
                     wordsBox.css({
                         top: TOP + 'px'
                     })
-                    playArea.addClass('play-area');
+
 
                 })
             })
             wordLayer.on('touchend', () => {
-                var pArea = Math.round((stratTop - TOP) / pTop);
-                //播放进度修改
-                var pTime = p.eq(pArea-1).data('time');
-                $('.play-area').on('click',()=>{
-                    // console.log($(this));
-                    playArea.removeClass('play-area');
-                    playTarget = true;
-                    audio.currentTime = pTime;
-                })
-                // console.log(pTime);
-                
+
                 timer = setTimeout(() => {
                     playTarget = true;
-                    playArea.removeClass('play-area');
-                }, 1000);
-                // timer1 = setTimeout(() => {
-                //     playArea.removeClass('play-area');
-                // }, 400);
+                }, 400);
 
-            });
-            //更换倍速
-            var playRate = $('.play-rate');
-            var rate = true;
-            playRate.on('click', () => {
-                if (rate) {
-                    playRate.data('rate', 1);
-                    rate = false;
-                }
-                if (playRate.data('rate') == 0.5) {
-                    playRate.text('1x');
-                    playRate.data('rate', 1);
-                } else if (playRate.data('rate') == 1) {
-
-                    playRate.text('1.5x');
-                    playRate.data('rate', 1.5);
-                } else if (playRate.data('rate') == 1.5) {
-
-                    playRate.text('2x');
-                    playRate.data('rate', 2);
-                } else if (playRate.data('rate') == 2) {
-
-                    playRate.text('0.5x');
-                    playRate.data('rate', 0.5);
-                }
             })
         })
     </script>
