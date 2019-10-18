@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <link rel="stylesheet" href="./font-awesome.min.css"> -->
+    <link rel="stylesheet" href="./reset.css">
+    <title>Document</title>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            margin: 0 auto;
+            height: 100%;
+            font-size: 16px;
+        }
+
+        .bg {
+            position: fixed;
+            background: url('bg.jpg')center center;
+            background-size: cover;
+            height: 100%;
+            width: 100%;
+            /* opacity: .85; */
+            z-index: -1;
+        }
+
+        .content {
+            height: 100%;
+        }
+
+        .nav {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            background-color: #80afc5;
+            height: .65rem;
+            width: calc(100% - .2rem);
+            padding: 0 .1rem 0;
+            z-index: 6;
+        }
+
+        .avater {
+            border-radius: 50%;
+            background: url('./avater.png')center center;
+            background-size: cover;
+            height: .6rem;
+            width: .6rem;
+            margin-top: .025rem;
+        }
+
+        .active-avater {
+            animation: run 10s linear 0.2s infinite;
+        }
+
+        .progress {
+            width: calc(100% - .75rem);
+            height: .05rem;
+            border-radius: .025rem;
+            margin-top: -.45rem;
+            margin-left: .7rem;
+            background-color: #344;
+            position: relative;
+        }
+
+        .progress-active {
+            position: absolute;
+            /* width: 1rem; */
+            height: .05rem;
+            background-image: linear-gradient(to right, #E8E8A8 0%, #9EE4A5 100%);
+            ;
+        }
+
+        .mask {
+            position: absolute;
+            width: .13rem;
+            height: .13rem;
+            background-color: #fff;
+            border-radius: 50%;
+            left: -.065rem;
+            top: -.04rem
+        }
+
+        .auto-img {
+            width: .25rem;
+            height: .25rem;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: .35rem
+        }
+
+        .auto-img1 {
+            width: .2rem;
+            height: .25rem;
+            position: absolute;
+            left: 63%;
+            top: .35rem
+        }
+
+        .auto-img2 {
+            width: .2rem;
+            height: .25rem;
+            position: absolute;
+            left: 31%;
+            top: .35rem
+        }
+
+        .auto-img3 {
+            width: .2rem;
+            height: .25rem;
+            position: absolute;
+            left: 77%;
+            top: .35rem
+        }
+
+        .layer {
+            position: absolute;
+            width: 100%;
+            height: .05rem;
+        }
+
+        .nav-top {
+            /* position: fixed;
+            top: 0;
+            left: 0; */
+            background-color: rgb(149, 199, 214);
+            width: calc(100% - .1rem);
+            height: .44rem;
+            opacity: .7;
+            padding: .05rem
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            height: 100%;
+        }
+
+        .nav-lis>li {
+            float: left;
+            font-size: .2rem;
+            color: #344;
+            margin: .1rem;
+            margin-right: .23rem;
+        }
+
+        .clearfix::after {
+            content: '';
+            clear: both;
+            display: block;
+        }
+
+        .line {
+            width: .3rem;
+            height: .01rem;
+            background-color: rgb(10, 10, 10);
+            margin-top: .06rem;
+
+        }
+
+        .active-title {
+            color: #fff !important
+        }
+
+        .img-search {
+            width: .25rem;
+            height: .25rem;
+            margin-top: .02rem;
+        }
+
+        .search-ipt {
+            background-color: #344;
+            width: 90%;
+            height: .35rem;
+            position: relative;
+            margin: auto;
+            opacity: .55;
+            border-radius: .09rem;
+            margin: .1rem auto
+        }
+
+        .ipt-text {
+            font-size: .15rem;
+            position: absolute;
+            left: 1.2rem;
+            color: #ddd;
+            top: .075rem;
+        }
+
+        .img-search1 {
+            width: .25rem;
+            position: absolute;
+            left: .85rem;
+            top: .05rem
+        }
+
+        .menu {
+            background-color: #344;
+            /* width: 100%; */
+            height: 1.62rem;
+            opacity: .55;
+            /* border-radius: .09rem; */
+            /* margin: .1rem auto */
+            color: #fff;
+        }
+
+        .menu-lis>li {
+            width: 33.33%;
+            float: left;
+            margin: .1rem auto;
+        }
+
+        .img-menu {
+            width: .3rem;
+            margin: auto;
+            display: block;
+            height: .3rem;
+        }
+
+        .menu-text {
+            margin-top: .1rem;
+            text-align: center;
+        }
+
+        .like-box {
+            background-color: #344;
+            height: .52rem;
+            opacity: .55;
+            margin: .1rem auto;
+            color: #fff;
+            padding-top: .15rem;
+            padding-left: .15rem;
+            padding-right: .15rem;
+            position: relative;
+        }
+
+        .like-text1 {
+            color: #ddd;
+            font-size: .14rem
+        }
+
+        .img-like {
+            width: .3rem;
+            position: absolute;
+            top: .185rem;
+            right: 0.1rem;
+        }
+
+        .music-box {
+            background-color: #344;
+            height: calc(100% - (.44rem + .1rem + .551rem + 1.621rem + .671rem + .651rem + .35rem));
+            opacity: .55;
+            /* margin: .1rem auto; */
+            color: #fff;
+            padding-top: .15rem;
+            padding-left: .15rem;
+            padding-right: .15rem;
+            position: relative;
+
+        }
+
+        .music-text {
+            border-bottom: .001rem solid #a29b9b;
+            padding: .1rem;
+            position: relative;
+            margin-bottom: .1rem;
+        }
+
+        .right-img {
+            width: .2rem;
+            position: absolute;
+            right: 0;
+            top: .105rem;
+        }
+
+        .add-img {
+            width: .3rem;
+            height: .3rem;
+        }
+
+        .music-text1>div {
+            float: left;
+        }
+
+        .music-text1>div:last-child {
+            line-height: 34px;
+            margin-left: .1rem
+        }
+
+        .singer-name {
+            position: absolute;
+            right: 1.8rem;
+        }
+
+        .add-list {
+            /* height: 1.5142rem; */
+            height: calc(100% - 1rem);
+            overflow-y: auto;
+        }
+
+        @keyframes run {
+            0% {
+                transform: rotateZ(0deg)
+            }
+
+            100% {
+                transform: rotateZ(360deg)
+            }
+        }
+
+        /* 查看歌曲列表 */
+        .read-list {
+            height: calc(100% - .65rem);
+            display: none;
+        }
+
+        .song-title {
+            text-align: center;
+            height: .5rem;
+            line-height: .5rem;
+            color: #fff;
+            position: relative;
+            font-size: .15rem;
+        }
+
+        .back {
+            position: absolute;
+            left: .15rem;
+            top: 0;
+            bottom: 0;
+            margin: auto 0;
+            width: .24rem;
+            height: .24rem;
+            background: url("./arrow-left.png") no-repeat center center;
+            background-size: cover;
+        }
+
+        .song-list {
+            /* background-color: rgba(255, 255, 255, .3); */
+            overflow-y: auto;
+            max-height: calc(100% - .6rem);
+        }
+
+        .song-list>ul>li {
+            padding: 0 .25rem;
+            height: .65rem;
+            border-bottom: 1px solid rgba(255, 255, 255, .3);
+        }
+
+        .sg {
+            width: .5rem;
+            height: .5rem;
+            background-color: #fff;
+            margin-top: .075rem;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .info {
+            height: .55rem;
+            max-width: 140px;
+            margin-left: .125rem;
+            margin-top: .1rem;
+        }
+
+        .one-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .info>.st {
+            font-size: .14rem;
+            color: #efefef;
+            height: .25rem;
+            line-height: .25rem;
+        }
+
+        .info>.sn {
+            font-size: .08rem;
+            color: #ececec;
+            height: .2rem;
+            line-height: .2rem;
+        }
+
+        .dt {
+            color: #efefef;
+            font-size: .07rem;
+            line-height: .65rem;
+        }
+
+        .song-list>ul>li.active {
+            background-color: rgba(255, 255, 255, .3);
+        }
+
+        .song-word {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 5;
+            /* background-color: #ddd; */
+            display: none;
+        }
+
+        .disc {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 2.5rem;
+            height: 2.5rem;
+            margin: auto;
+            border-radius: 50%;
+            background-color: #333;
+            display: none;
+        }
+
+        /* .sond-word-controls {
+            width: calc(100% - 2.88rem);
+        } */
+
+        .words {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            height: calc(100% - .65rem);
+            /* background-color: #333; */
+            overflow-y: hidden;
+
+        }
+
+
+        .words-box {
+            position: absolute;
+            top: 2rem;
+            left: 0;
+            width: calc(100% - .3rem);
+            padding: .15rem;
+            text-align: center;
+            color: #efefef;
+            font-size: .17rem;
+        }
+
+        .words-box>p {
+            height: .4rem;
+            line-height: .4rem;
+        }
+
+        .close {
+            width: .35rem;
+            height: .5rem;
+            position: absolute;
+            right: .15rem;
+            top: .15rem;
+        }
+
+        .close>.a {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background-color: #efefef;
+            left: 0;
+            top: 50%;
+        }
+
+        .close>.a1 {
+            transform: rotateZ(45deg) translateY(-50%);
+        }
+
+        .close>.a2 {
+            transform: rotateZ(-45deg) translateY(-50%);
+        }
+
+        .animate {
+            width: calc(8px + .4rem);
+            height: .165rem;
+            /* background-color: #3f3f3f; */
+            margin-top: .2325rem;
+            margin-left: .1rem;
+        }
+
+        .line {
+            width: 2px;
+            height: 100%;
+            background-color: #efefef;
+            margin: 0 .05rem;
+        }
+
+        .line1 {
+            animation: sc .15s linear 0s infinite alternate paused;
+        }
+
+        .line2 {
+            animation: sc .15s linear .15s infinite alternate paused;
+        }
+
+        .auto-imgs {
+            width: .5rem
+        }
+
+        @keyframes sc {
+
+            0% {
+                transform: scaleY(.5);
+            }
+
+            100% {
+                transform: scaleY(1);
+            }
+
+        }
+
+        .song-word {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 5;
+            /* background-color: #ddd; */
+            display: none;
+        }
+
+        .disc {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 5rem;
+            height: 5rem;
+            margin: auto;
+            border-radius: 50%;
+            background-color: #333;
+            display: none;
+        }
+
+        .sond-word-controls {
+            width: calc(100% - 2.88rem);
+        }
+
+        .content-box {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .sactive {
+            color: #F5B940;
+            font-size: .2rem;
+            transition: all .18s
+        }
+
+        .time-box {
+            position: absolute;
+            top: -.2rem;
+            width: 100%;
+            font-size: .14rem;
+            
+        }
+
+        .tl {
+            float: left;
+        }
+
+        .tr {
+            float: right;
+        }
+        .t{
+            color: #fff6f7;
+        }
+        .word-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .active-bg {
+            background: rgb(94, 117, 121) !important;
+            opacity: 0.8 !important;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg"></div>
+    <div class="content">
+        <!-- 导航条 -->
+        <div class="nav-top">
+            <ul class="nav-lis clearfix">
+                <li>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </li>
+                <li class="active-title">我的</li>
+                <li>音乐馆</li>
+                <li>发现</li>
+                <li><img src="./search.png" class="img-search" alt=""></li>
+            </ul>
+        </div>
+        <!-- 搜索框 -->
+        <div class="search-ipt"><img class="img-search1" src="./search.png" alt=""><span class="ipt-text">查找我的音乐</span>
+        </div>
+        <!-- 菜单栏 -->
+        <div class="menu">
+            <ul class="menu-lis clearfix">
+                <li data-title="0">
+                    <div><img src="./music.png" alt="" class="img-menu"></div>
+                    <div class="menu-text">本地歌曲</div>
+                </li>
+                <li data-title="1">
+                    <div><img src="./download.png" alt="" class="img-menu"></div>
+                    <div class="menu-text">下载歌曲</div>
+                </li>
+                <li data-title="2">
+                    <div><img src="./time.png" alt="" class="img-menu"></div>
+                    <div class="menu-text">最近播放</div>
+                </li>
+                <li data-title="3">
+                    <div><img src="./Like.png" alt="" class="img-menu"></div>
+                    <div class="menu-text">我喜欢</div>
+                </li>
+                <li data-title="4">
+                    <div><img src="./MV.png" alt="" class="img-menu"></div>
+                    <div class="menu-text">下载MV</div>
+                </li>
+                <li data-title="5">
+                    <div><img src="./music(1).png" alt="" class="img-menu"></div>
+                    <div class="menu-text">听歌识曲</div>
+                </li>
+            </ul>
+        </div>
+        <!-- 我的歌单系列 -->
+        <div class="like-box">
+            <div class="like-text">猜你喜欢</div>
+            <div class="like-text1">偶遇身边好音乐</div>
+            <div class=""><img src="./play(2).png" alt="" class="img-like"></div>
+        </div>
+        <div class="music-box">
+            <div class="music-text">我的歌单<div><img class="right-img" src="./right.png" alt=""></div>
+            </div>
+            <div class="like-text1 music-text1 clearfix">
+                <div><img src="./add.png" class="add-img" alt=""></div>
+                <div>新建歌单</div>
+            </div>
+            <div class="add-list">
+                <ul class="lis-music"></ul>
+            </div>
+
+        </div>
+        <!-- 查看歌曲列表 -->
+        <div class="read-list">
+            <div class="song-title">
+                <span class="back"></span>
+                本地歌曲
+            </div>
+            <div class="song-list">
+                <ul id="current-list">
+
+
+                </ul>
+            </div>
+        </div>
+        <!-- 控制条 -->
+        <div class="nav">
+            <div class="avater"></div>
+            <div class="progress">
+                <!-- 时间节点 -->
+                <div class="time-box">
+                    <span class="tl">00:00</span>
+                    <span class="tr">00:00</span>
+                </div>
+                <!-- 激活层 -->
+                <div class="progress-active"></div>
+                <!-- 滑块 -->
+                <div class="mask"></div>
+                <!-- 视图层 -->
+                <div class="layer"></div>
+
+            </div>
+            <div class="icon">
+                <img src="./previous.png" class="auto-img2" alt="">
+                <img src="./play(2).png" class="auto-img" data-index="0" alt="">
+                <img src="./next.png" class="auto-img1" alt="">
+                <img src="./loop-once.png" class="auto-img3" data-mode="0" alt="">
+            </div>
+            <!-- <div class="singer-name">
+                <div>歌名: <span>1</span></div>
+                <div>歌手: <span>1</span></div>
+            </div> -->
+
+        </div>
+        <!-- 歌词 -->
+        <div class="song-word">
+
+            <div class="words">
+                <div class="words-box">
+                </div>
+                <div class="word-layer"></div>
+            </div>
+
+            <!-- 关闭 -->
+            <div class="close">
+                <i class="a a1"></i>
+                <i class="a a2"></i>
+            </div>
+
+
+        </div>
+    </div>
+    <audio preload class="audio" src="http://sc1.111ttt.cn/2014/1/11/04/4042004024.mp3"></audio>
+    <script src="./jquery-3.4.1.js"></script>
+    <script src="./rem.js"></script>
+    <script>
+        $(function () {
+            var $mask = $('.mask');
+            var maskWidth = $mask.width();
+            var url = 'https://music.163.com/song/media/outer/url?id=';
+            //获取未激活进度条宽度
+            var progressWidth = $('.progress').width();
+            //获取播放暂停按钮
+            var $autoImg = $('.auto-img');
+
+            //滑块移动范围
+            var minLeft = 0;
+            var maxLeft = progressWidth - maskWidth;
+            var isChange = false;
+            var $layer = $('.layer');
+            //滑块移动
+            function move(e) {
+                //获取触碰屏幕X坐标
+                var x = e.targetTouches[0].pageX;
+
+
+                //获取当前元素距离屏幕最左端的距离
+                var offsetLeft = $(this).offset().left;
+
+
+
+                var left = x - offsetLeft - maskWidth / 2;
+
+                left = left >= maxLeft ? maxLeft : left <= minLeft ? minLeft : left;
+
+                $mask.css({
+                    left: left + 'px'
+                })
+
+                //激活进度条的宽度
+                var w = x - offsetLeft;
+                w = w >= progressWidth ? progressWidth : w <= 0 ? 0 : w;
+                $('.progress-active').css({
+                    width: w + 'px'
+                })
+            }
+
+            $layer.on('touchstart', function (e) {
+                move.call(this, e);
+                isChange = true;
+                $layer.on('touchmove', function (e) {
+
+                    move.call(this, e);
+
+                })
+            })
+
+            $layer.on('touchend', function (e) {
+                isChange = false;
+                var percent = $('.progress-active').width() / $layer.width();
+                if ($autoImg.data('index') == 1) {
+                    audio.currentTime = percent * duration;
+                }
+
+            })
+
+            var audio = document.querySelector('.audio');
+
+            //获取音频总时间
+            var duration = null;
+
+
+
+            //音频播放完成后触发
+            var modeChange = $('.auto-img3');
+
+            audio.onended = function () {
+                console.log('finished');
+                var $li = $('.song-list li');
+                // console.log(modeChange.data('mode'));
+                var $liActive = $('.song-list .active');
+                var index = $liActive.index();
+                if (index + 1 >= $li.length) {
+                    index = 0;
+                }
+                // $animate=$li.eq(index+1).find('.animate');
+                //0，单曲循环；1：顺序播放；2：随机播放
+                if (modeChange.data('mode') == 1) {
+                    let id = $li.eq(index + 1).data('id');
+                    $liActive.find('.line').css({
+                        animationPlayState: 'paused'
+                    });
+                    $li.eq(index + 1).addClass('active').siblings().removeClass('active');
+                    $liActive.attr('name', 1);
+                    //通过歌曲id获取音频
+                    audio.src = url + id;
+                    $(audio).attr('name', id);
+                    $li.eq(index + 1).find('.line').css({
+                        animationPlayState: 'running'
+                    });
+                } else if (modeChange.data('mode') == 2) {
+                    let index = Math.floor(Math.random() * $li.length);
+
+                    let id = $li.eq(index).data('id');
+                    $liActive.find('.line').css({
+                        animationPlayState: 'paused'
+                    });
+                    $li.eq(index).addClass('active').siblings().removeClass('active');
+                    $liActive.attr('name', 1);
+                    //通过歌曲id获取音频
+                    audio.src = url + id;
+                    $(audio).attr('name', id);
+                    $li.eq(index).find('.line').css({
+                        animationPlayState: 'running'
+                    });
+                }
+                //    $avater.removeClass('active-avater');
+                // $autoImg.attr('src', './play(2).png');
+                // $autoImg.attr('src', './pause(1).png');
+                // $('.animate>span').css({
+                //     animationPlayState: 'paused'
+                // });
+                // $autoImg.data('index',0);
+
+                audio.play();
+
+            }
+
+            var wordsBoxTop = parseFloat($('.words-box').css('top'));
+
+            //切换模式
+            modeChange.on('click', function () {
+                //0，单曲循环；1：顺序播放；2：随机播放
+                if (modeChange.data('mode') == 0) {
+                    modeChange.data('mode', 1);
+                    modeChange.attr('src', './loop2.png');
+                } else if (modeChange.data('mode') == 1) {
+                    modeChange.data('mode', 2);
+                    modeChange.attr('src', './loop1.png');
+                } else {
+                    modeChange.data('mode', 0);
+                    modeChange.attr('src', './loop-once.png');
+                }
+
+            });
+
+            audio.oncanplay = function () {
+                duration = this.duration;
+                tr.text(dealSongTime(this.duration * 1000));
+
+                var self = this;
+                var $liActive = $('li.active');
+                $avater.css({
+                    animationPlayState: 'running'
+                })
+
+                $liActive.attr('name', 1);
+                //获取歌词
+                var id = $liActive.data('id');
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://www.arthurdon.top:3000/lyric?id=' + id,
+                    success: function (data) {
+
+                        //移出其他歌词
+                        $('.words-box').css({
+                            top: wordsBoxTop + 'px'
+                        }).empty();
+
+                        // console.log('data ==> ', data.lrc.lyric);
+                        var lyric = data.lrc.lyric.split(/[\n\r]+/);
+                        // console.log('lyric ==> ', lyric);
+
+                        for (var i = 0; i < lyric.length; i++) {
+                            var lrc = lyric[i].split(']');
+                            //歌词文本
+                            var text = lrc[1];
+                            // console.log('text ==> ', text);
+
+                            if (text) {
+                                //歌词时刻
+                                var time = lrc[0].slice(1).split(':');
+
+                                var second = Number(time[0]) * 60 + Number(time[1]);
+                                var $p = $(`<p data-time="${second}">${text}</p>`);
+
+                                $('.words-box').append($p);
+                            }
+
+
+                        }
+
+                        self.play();
+                        var $animate = $liActive.find('.animate');
+                        $animate.find('.line').css({
+                            animationPlayState: 'running'
+                        })
+
+
+                        $liActive.attr('name', 1);
+
+                        //设置歌曲当前播放时间和歌曲总时间
+                        $('.dtime').text(dealSongTime(self.duration * 1000));
+
+                        $('.sing').each(function () {
+                            $(this).find('span').eq(0).text($liActive.find('.st')
+                                .text());
+                            $(this).find('span').eq(1).text($liActive.find('.sn')
+                                .text());
+                        })
+
+
+                        //控制条头像更换
+                        $avater.css({
+                            background: 'url(' + $liActive.find('img').attr('src') +
+                                ')  no-repeat center center',
+                            backgroundSize: 'cover'
+                        })
+                    }
+                })
+            }
+            //时间节点
+            var tl = $('.tl');
+            var tr = $('.tr');
+            var playTarget = true;
+            //时间
+            //监听音频实时变化
+            audio.ontimeupdate = function () {
+                var $ps = $('.words-box>p');
+
+                tl.text(dealSongTime(this.currentTime * 1000));
+                var height = $ps.height();
+                // console.log('height ==> ', height);
+                if (!isChange) {
+                    var currentTime = this.currentTime;
+
+                    var percent = currentTime / duration;
+
+                    $('.mask').css({
+                        left: percent * $('.layer').width() - $('.mask').width() / 2 + 'px'
+                    })
+                    $('.progress-active').css({
+                        width: percent * $('.layer').width() + 'px'
+                    })
+                }
+                //歌词移动
+                for (var i = 0; i < $ps.length; i++) {
+                    //获取当前的p和下一个p元素
+                    var currentTime = $ps.eq(i).data('time');
+                    var nextTime = $ps.eq(i + 1).data('time');
+
+                    // console.log('currentTime ==> ', currentTime);
+                    // console.log('this.currentTime ==> ', this.currentTime);
+                    // console.log('nextTime ==> ', nextTime);
+
+                    if (i + 1 == $ps.length) {
+                        nextTime = Number.MAX_VALUE;
+                    }
+
+                    if (this.currentTime >= currentTime && this.currentTime < nextTime) {
+                        // console.log(i);
+                        // console.log($ps.length);
+                        if (playTarget) {
+
+                            $('.words-box').animate({
+                                top: wordsBoxTop - height * i - 8 + 'px'
+                            }, 200)
+                        }
+
+                        if (i - 1 >= 0) {
+                            $ps.eq(i - 1).removeClass('sactive');
+                        }
+
+                        //    setTimeout(() => {
+
+                        //    }, 500);
+                        $ps.eq(i).addClass('sactive');
+                        // $ps.animate({})
+                        break;
+                    }
+
+                }
+            }
+            // var avaterBtn=$('.auto-img');
+            //暂停播放按钮点击
+            $autoImg.on('click', function () {
+                var $liActive = $('li.active');
+
+                if ($(this).data('index') == 0) {
+
+                    $('.avater').addClass('active-avater');
+                    $(this).attr('src', './pause(1).png');
+                    $(this).data('index', 1);
+                    audio.play();
+                    var percent = $('.progress-active').width() / $layer.width();
+                    audio.currentTime = percent * duration;
+                    //播放动画
+                    $liActive.find('.line').css({
+                        animationPlayState: 'running'
+                    })
+                    $('.active-avater').css({
+                        animationPlayState: 'running'
+                    });
+                    $avater.css({
+                        animationPlayState: 'running'
+                    });
+                    $liActive.attr('name', 1);
+                } else {
+                    $(this).attr('src', './play(2).png');
+                    $(this).data('index', 0);
+                    audio.pause();
+                    $liActive.find('.line').css({
+                        animationPlayState: 'paused'
+                    })
+                    $('.active-avater').css({
+                        animationPlayState: 'paused'
+                    })
+                    $avater.css({
+                        animationPlayState: 'paused'
+                    });
+                    $liActive.attr('name', 0);
+                }
+
+            });
+
+            var songsId = [];
+            // 歌曲详情
+            var d = localStorage.songs;
+            var songsDetail = [];
+            if (d) {
+                d = JSON.parse(d);
+                songsDetail = d.playlist.tracks.concat();
+
+
+                //保存歌曲id
+                for (var i = 0; i < d.privileges.length; i++) {
+                    songsId.push(d.privileges[i].id);
+                }
+
+                $('.local-song').text(songsId.length);
+
+            } else {
+                //获取歌单
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://www.arthurdon.top:3000/top/list?idx=1',
+                    success: function (data) {
+                        console.log('data ==> ', data);
+
+                        localStorage.setItem('songs', JSON.stringify(data))
+
+                        songsDetail = data.playlist.tracks.concat();
+
+                        //保存歌曲id
+                        for (var i = 0; i < data.privileges.length; i++) {
+                            songsId.push(data.privileges[i].id);
+                        }
+
+                        // $('.local-song').text(songsId.length);
+
+                    }
+                })
+            }
+
+            //保存用户浏览器的歌曲id
+            var previewIds = [];
+            var startsIndex = 0;
+            var endIndex = 15;
+
+            $('.menu-lis>li').on('click', function () {
+                $('.nav-top,.search-ipt,.menu,.like-box,.music-box').hide();
+                $('.read-list').show();
+
+                if (previewIds.length == 0) {
+                    previewIds = previewIds.concat(songsId.slice(startsIndex, endIndex));
+                    startsIndex = endIndex;
+                    endIndex += endIndex;
+                }
+                //加载15首歌曲
+                if ($(this).data('title') == $('.read-list').data('title')) {
+                    return;
+                }
+                console.log(songsDetail);
+                $('#current-list').empty();
+
+                for (var i = 0; i < previewIds.length; i++) {
+
+                    var $li = $(`<li data-id="${songsDetail[i].id}" name="0" data-img="${songsDetail[i].al.picUrl}">
+                                <div class="sg fl">
+                                    <img class="auto-imgs" src="${songsDetail[i].al.picUrl}" />
+                                </div>
+                                <div class="fl info">
+                                    <div class="st one-text">${songsDetail[i].name}</div>
+
+                                </div>
+                                <div class="s-time fr clearfix">
+                                   <div class="dt fl">${dealSongTime(songsDetail[i].dt)}</div>
+                                   <div class="animate fl">
+                                        <span class="line fl line1"></span>
+                                        <span class="line fl line2"></span>
+                                        <span class="line fl line1"></span>
+                                        <span class="line fl line2"></span>
+                                   </div>
+                                </div>
+                            </li>`);
+
+                    var sg = [];
+                    for (var j = 0; j < songsDetail[i].ar.length; j++) {
+                        sg.push(songsDetail[i].ar[j].name);
+                    }
+                    var $singers = $(`<div class="sn one-text">${sg.join(' / ')}</div>`);
+
+                    $li.find('.info').append($singers);
+                    $('#current-list').append($li);
+                }
+
+            });
+
+
+            //处理歌曲时间
+            function dealSongTime(time) {
+                var second = Math.floor(time / 1000 % 60);
+                second = second >= 10 ? second : '0' + second;
+                var minute = Math.floor(time / 1000 / 60);
+                minute = minute >= 10 ? minute : '0' + minute;
+
+                return minute + ':' + second;
+
+            }
+            //返回首页
+            $('.back').on('click', function () {
+                $('.nav-top,.search-ipt,.menu,.like-box,.music-box').show();
+                $('.read-list').hide();
+            });
+            var $avater = $('.avater');
+            var $animate = null;
+            // 点击列表
+            var readList = $('.read-list');
+            var songWord = $('.song-word');
+            var $avater = $('.avater');
+
+
+            //点击歌曲列表选择歌曲
+            $('#current-list').on('click', 'li', function () {
+
+                if (!$(this).hasClass('active')) {
+                    var $liActive = $('li.active');
+                    if ($liActive.length > 0) {
+                        $liActive.removeClass('active');
+                        // $('.avater').css({ animationPlayState: 'running'});
+                        // $(this).data('index', 1);
+                        if ($liActive.attr('name', 1)) {
+                            $liActive.find('.line').css({
+                                animationPlayState: 'paused'
+                            })
+                        }
+                    }
+                }
+
+                $animate = $(this).find('.animate');
+
+
+                $(this).addClass('active');
+
+                //获取歌曲的id
+                var id = $(this).data('id');
+                // //获取控制条播放暂停按钮
+                // console.log('id ==> ', id);
+
+                if (id == $(audio).attr('name')) {
+                    //播放同一首歌曲
+                    if ($(this).attr('name') == 0) {
+                        //播放
+                        $(this).attr('name', 1);
+                        audio.play();
+                        var percent = $('.progress-active').width() / $layer.width();
+                        audio.currentTime = percent * duration;
+                        $avater.addClass('active-avater');
+                        $autoImg.attr('src', './pause(1).png');
+                        //播放动画
+                        $(this).find('.line').css({
+                            animationPlayState: 'running'
+                        })
+                        // $avater.css({ animationPlayState: 'running'});
+                        $autoImg.data('index', 1);
+                        $('.m-play-stop').css({
+                            background: 'url("./images/stop.png") no-repeat center center',
+                            backgroundSize: 'cover'
+                        })
+                    } else {
+                        //停止
+                        audio.pause();
+                        $autoImg.data('index', 0);
+                        $avater.css({
+                            animationPlayState: 'paused'
+                        });
+                        $(this).attr('name', 0);
+                        $autoImg.attr('src', './play(2).png');
+                        //停止动画
+                        $(this).find('.line').css({
+                            animationPlayState: 'paused'
+                        })
+
+                        // $('.m-play-stop').css({
+                        //     background: 'url("./images/play.png") no-repeat center center',
+                        //     backgroundSize: 'cover'
+                        // })
+                    }
+
+                } else {
+                    $(audio).attr('name', id);
+                    $avater.addClass('active-avater');
+                    $autoImg.attr('src', './pause(1).png');
+                    $autoImg.data('index', 1);
+                    //通过歌曲id获取音频
+                    audio.src = url + id;
+                    // audio.play();
+                }
+
+            })
+            //点击头像查看歌曲歌词
+            $avater.on('click', function () {
+                readList.hide();
+                songWord.show();
+                $('.nav').addClass('active-bg');
+                $('.words').addClass('active-bg');
+                $('.tl,.tr').addClass('t');
+            });
+            var close = $('.close');
+            close.on('click', function () {
+                readList.show();
+                songWord.hide();
+                $('.nav').removeClass('active-bg');
+                $('.words').removeClass('active-bg');
+                $('.tl,.tr').removeClass('t');
+            });
+
+            //点击切换上一首
+            let $pre = $('.auto-img2');
+            $pre.on('click', () => {
+                let $liActive = $('.song-list .active');
+                let $li = $('.song-list li');
+                $autoImg.attr('src', './pause(1).png').data('index', 1);
+                $liActive.attr('name', 1);
+                //判断播放模式
+                if (modeChange.data('mode') == 0 || modeChange.data('mode') == 1) {
+                    let index = $liActive.index();
+                    var id = $li.eq(index - 1).data('id');
+                    $(audio).attr('name', id);
+                    $liActive.find('.line').css({
+                        animationPlayState: 'paused'
+                    });
+                    $li.eq(index - 1).addClass('active').siblings().removeClass('active');
+                    $li.eq(index - 1).find('.line').css({
+                        animationPlayState: 'running'
+                    });
+
+                } else if (modeChange.data('mode') == 2) {
+                    let index = Math.floor(Math.random() * $li.length);
+
+                    var id = $li.eq(index).data('id');
+                    $(audio).attr('name', id);
+                    $liActive.find('.line').css({
+                        animationPlayState: 'paused'
+                    });
+                    $li.eq(index).addClass('active').siblings().removeClass('active');
+                    $li.eq(index).find('.line').css({
+                        animationPlayState: 'running'
+                    });
+
+                }
+
+                //通过歌曲id获取音频
+                audio.src = url + id;
+            })
+            //点击切换下一首
+            let $next = $('.auto-img1');
+            $next.on('click', () => {
+                let $liActive = $('.song-list .active');
+                let $li = $('.song-list li');
+                $autoImg.attr('src', './pause(1).png').data('index', 1);
+                $liActive.attr('name', 1)
+                //判断播放模式
+                if (modeChange.data('mode') == 0 || modeChange.data('mode') == 1) {
+                    let index = $liActive.index();
+                    var id = $li.eq(index + 1).data('id');
+                    $(audio).attr('name', id);
+                    $liActive.find('.line').css({
+                        animationPlayState: 'paused'
+                    });
+                    $li.eq(index + 1).addClass('active').siblings().removeClass('active');
+                    $li.eq(index + 1).find('.line').css({
+                        animationPlayState: 'running'
+                    });
+
+                } else if (modeChange.data('mode') == 2) {
+                    let index = Math.floor(Math.random() * $li.length);
+
+                    var id = $li.eq(index).data('id');
+                    $(audio).attr('name', id);
+                    $liActive.find('.line').css({
+                        animationPlayState: 'paused'
+                    });
+                    $li.eq(index).addClass('active').siblings().removeClass('active');
+                    $li.eq(index).find('.line').css({
+                        animationPlayState: 'running'
+                    });
+
+                }
+
+                //通过歌曲id获取音频
+                audio.src = url + id;
+            });
+
+            let wordLayer = $('.word-layer');
+            let wordsBox = $('.words-box');
+            var timer = null;
+            wordLayer.on('touchstart', (e) => {
+                clearTimeout(timer);
+                var startY = e.targetTouches[0].pageY;
+                var a = wordsBox.position().top;
+                wordLayer.on('touchmove', (e) => {
+                    playTarget = false;
+                    var moveY = e.targetTouches[0].pageY;
+                    var y = startY - moveY;
+
+                    var TOP = -y + a;
+
+                    wordsBox.css({
+                        top: TOP + 'px'
+                    })
+
+
+                })
+            })
+            wordLayer.on('touchend', () => {
+
+                timer = setTimeout(() => {
+                    playTarget = true;
+                }, 400);
+
+            })
+        })
+    </script>
+
+</body>
+
+</html>
